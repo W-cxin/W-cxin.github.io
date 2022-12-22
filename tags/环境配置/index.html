@@ -15,17 +15,12 @@
 
 
 
-<meta name="description" content="docker连接远程服务器配置">
-<meta property="og:type" content="article">
-<meta property="og:title" content="docker">
-<meta property="og:url" content="http://example.com/2022/12/22/docker/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="docker连接远程服务器配置">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-12-22T15:34:20.000Z">
-<meta property="article:modified_time" content="2022-12-22T16:05:11.274Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
@@ -60,7 +55,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>docker | Hexo</title>
+<title>Tag: 环境配置 | Hexo</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -70,9 +65,9 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: true,
+        isPost: false,
         isArchive: false,
-        isTag: false,
+        isTag: true,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
@@ -267,217 +262,56 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-docker" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2022/12/22/docker/" class="article-date">
-      <time datetime="2022-12-22T15:34:20.000Z" itemprop="datePublished">2022-12-22</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2022" class="archive-year">2022</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2022/12/22/docker/" class="archive-article-date">
+      <time datetime="2022-12-22T15:34:20.000Z" itemprop="datePublished">12-22</time>
 </a>
 
 
-    </div>
+        </div>
+         
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      docker
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/12/22/docker/">docker</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
+        <div class="article-info info-on-archive">
+          
 
-        
+          
     <div class="article-tag tagcloud">
         <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li></ul>
     </div>
 
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="完整的docker服务器配置过程"><a href="#完整的docker服务器配置过程" class="headerlink" title="完整的docker服务器配置过程"></a>完整的docker服务器配置过程</h1><ol>
-<li><p>docker run -p 10022:22 –runtime&#x3D;nvidia –ipc&#x3D;host –shm-size&#x3D;32G –gpus all –name your_name -v &#x2F;:&#x2F;mnt –privileged&#x3D;true -it your_docker_image &#x2F;bin&#x2F;bash</p>
-<ul>
-<li><p>这个使用的是所有gpu，建议直接指定gpu，不要用all，用all容易有0号显卡爆显存的问题</p>
-</li>
-<li><p>映射这一步中的 -v &#x2F;:&#x2F;mnt –privileged&#x3D;true 非常重要，把宿主机&#x2F;mnt里的所有目录映射到容器里，打开宿主机上的文件时只要在前面加上&#x2F;mnt即可，eg. cd &#x2F;mnt&#x2F;mnt&#x2F;users&#x2F;…</p>
-</li>
-<li><p>再次进行创建，只使用gpu 6：docker run -p 10023:22 –runtime&#x3D;nvidia –ipc&#x3D;host –shm-size&#x3D;32G –gpus&#x3D;’”device&#x3D;6”‘ –name your_name -v &#x2F;:&#x2F;mnt -it your_docker_image &#x2F;bin&#x2F;bash（如果加上–privileged&#x3D;true就还是使用所有的gpu，要使用多gpu可以–gpus&#x3D;’”device&#x3D;5,6”‘）</p>
-</li>
-</ul>
-</li>
-</ol>
-<p>显示root@（容器ID比如是12345）</p>
-<p>接着进入已经创建好的容器：docker exec -it 12345 &#x2F;bin&#x2F;bash，如果没有启动就运行：docker start 12345</p>
-<ol start="2">
-<li><p>apt update<br>apt install -y openssh-server</p>
-</li>
-<li><p>mkdir &#x2F;var&#x2F;run&#x2F;sshd</p>
-</li>
-<li><p>修改密码和用户名（用户名默认是root，此处不改），输入passwd进行密码的修改，记住密码 </p>
-</li>
-<li><p>sed -i ‘s&#x2F;PermitRootLogin prohibit-password&#x2F;PermitRootLogin yes&#x2F;‘ &#x2F;etc&#x2F;ssh&#x2F;sshd_config<br>sed ‘s@session\s<em>required\s</em>pam_loginuid.so@session optional pam_loginuid.so@g’ -i &#x2F;etc&#x2F;pam.d&#x2F;sshd<br>echo “export VISIBLE&#x3D;now” &gt;&gt; &#x2F;etc&#x2F;profile</p>
-</li>
-<li><p>进入config修改设置：vim &#x2F;etc&#x2F;ssh&#x2F;sshd_config</p>
-</li>
-</ol>
-<p>发现这个容器里没有安装vim，使用yum安装也发现没有yum，直接用<code>apt-get install vim*</code>即可。</p>
-<p>vim的命令和使用可参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/ycsdn10/article/details/121933411">https://blog.csdn.net/ycsdn10/article/details/121933411</a></p>
-<ol start="7">
-<li><p>进入config文件后：将 <code>PermitRootLogin</code> 参数修改为 <code>yes</code>，将 <code>PasswordAuthentication</code> 参数修改为 <code>yes</code>，将<code>PubkeyAuthentication</code> 改为 <code>yes</code></p>
-</li>
-<li><p>重启ssh服务：<code>service ssh restart</code></p>
-</li>
-<li><p>进行验证：</p>
-</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker port your_name <span class="number">22</span></span><br><span class="line"><span class="comment"># 如果前面的配置生效了，你会看到如下输出</span></span><br><span class="line"><span class="comment"># 0.0.0.0:10022</span></span><br><span class="line">ssh root@(连接的服务器的IP地址) -p <span class="number">10022</span></span><br><span class="line"><span class="comment"># 密码是你前面自己设置的</span></span><br><span class="line"><span class="comment"># 如果能进入docker的命令行，则表示成功</span></span><br></pre></td></tr></table></figure>
-
-<ol start="10">
-<li>验证完进行pycharm里的配置：<ul>
-<li>接下来配置PyCharmTools &gt; Deployment &gt; Configuration</li>
-<li>再配置PyCharm的File &gt; Setting &gt; Project &gt; Python Interpreter设置远程解释器</li>
-<li>注意端口的对应关系，其他的都是跟之前配置过的一致</li>
-</ul>
-</li>
-</ol>
-<p>在选择解释器的时候，Interpreter路径查看方法（在docker中输入）：which python，得到路径：&#x2F;opt&#x2F;conda&#x2F;bin&#x2F;python</p>
-<p>如果terminal中输入python报错-bash: python: command not found，则解决方案是建立软链接： <code>ln -sf /opt/conda/bin/python3 /usr/bin/python</code>。需要注意的是前面的路径就是真实docker中的python的路径（which python显示的路径），后面的写法是统一的。<br>W<br>一些命令的补充：</p>
-<ul>
-<li><p>docker删除镜像：docker rmi （image名称）</p>
-</li>
-<li><p>docker删除容器：docker rm -f 镜像的ID</p>
-</li>
-</ul>
-
-      
-    </div>
-    
-  </div>
-  
-    
-    <div class="copyright">
-        <p><span>Title:</span><a href="/2022/12/22/docker/">docker</a></p>
-        <p><span>Author:</span><a href="/" title="Back to Homepage"></a></p>
-        <p><span>Created:</span>2022-12-22, 23:34:20</p>
-        <p><span>Updated:</span>2022-12-23, 00:05:11</p>
-        <p>
-            <span>Full URL:</span><a class="post-url" href="/2022/12/22/docker/" title="docker">http://example.com/2022/12/22/docker/</a>
-            <span class="copy-path" data-clipboard-text="From http://example.com/2022/12/22/docker/　　By " title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
-        </p>
-    </div>
-
-
-
-    <nav id="article-nav">
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2022/12/20/hello-world/">
-                    Hello World
-                </a>
-            </div>
-        
-    </nav>
-
-  
-</article>
-
-    <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
-        
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84docker%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">完整的docker服务器配置过程</span></a></li></ol>
-        
-    </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-3 i,
-        .toc-level-3 ol {
-            display: none !important;
-        }
-    </style>
-
-    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
-
-    <script>
-        yiliaConfig.toc = ["Hide", "Show", !!"false"];
-    </script>
-
-
-
-    
-<div class="share">
-    
-        <div class="bdsharebuttonbox">
-            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
-            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
-            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
-            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
-            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
         </div>
-        <script>
-            window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"docker　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-        </script>
-    
-
-    
-</div>
-
-
-
-
-
-
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
+  
 
     
 
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
-        
-
-        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2022/12/20/hello-world/" title="Next: Hello World">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/12/22/docker/">docker</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/12/20/hello-world/">Hello World</a></li></ul>
-
-
-
-
-    <script>
-        
-    </script>
 </div>
       <footer id="footer">
     <div class="outer">
