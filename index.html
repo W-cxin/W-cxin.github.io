@@ -338,8 +338,7 @@
 </li>
 </ol>
 <p>在选择解释器的时候，Interpreter路径查看方法（在docker中输入）：which python，得到路径：&#x2F;opt&#x2F;conda&#x2F;bin&#x2F;python</p>
-<p>如果terminal中输入python报错-bash: python: command not found，则解决方案是建立软链接： ln -sf &#x2F;opt&#x2F;conda&#x2F;bin&#x2F;python3 &#x2F;usr&#x2F;bin&#x2F;python。需要注意的是前面的路径就是真实docker中的python的路径（which python显示的路径），后面的写法是统一的。</p>
-<p>一些命令的补充：</p>
+<p>如果terminal中输入python报错-bash: python: command not found，则解决方案是建立软链接： <code>ln -sf /opt/conda/bin/python3 /usr/bin/python</code>。需要注意的是前面的路径就是真实docker中的python的路径（which python显示的路径），后面的写法是统一的。<br>W<br>一些命令的补充：</p>
 <ul>
 <li><p>docker删除镜像：docker rmi （image名称）</p>
 </li>
